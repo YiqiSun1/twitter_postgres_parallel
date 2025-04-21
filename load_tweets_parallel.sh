@@ -6,18 +6,14 @@ echo '==========================================================================
 echo 'load pg_denormalized'
 echo '================================================================================'
 # FIXME: implement this with GNU parallel
-for file in $files; do
-     unzip -p "$file" | sed 's/\\u0000//g' | psql postgres://postgres:pass@localhost:10641/postgres -c "COPY tweets_jsonb (data) FROM STDIN csv quote e'\x01' delimiter e'\x02';"
+time echo "$files" | parallel ./load_denormalized.sh
     #use SQL's COPY command to load data into pg_denormalized
-done
 
 echo '================================================================================'
 echo 'load pg_normalized'
 echo '================================================================================'
 # FIXME: implement this with GNU parallel
-for file in $files; do
-        python3 load_tweets.py --db postgresql://postgres:pass@localhost:10642/postgres --inputs "$file" --print_every 10000
-done
+time echo "$files" | parallel ./load_normalized.sh
 
 
 
@@ -25,6 +21,7 @@ echo '==========================================================================
 echo 'load pg_normalized_batch'
 echo '================================================================================'
 # FIXME: implement this with GNU parallel
+#time echo "$files" | parallel ./load_normalized.sh
 
 
 
