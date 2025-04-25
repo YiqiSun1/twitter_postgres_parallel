@@ -21,7 +21,7 @@ echo '==========================================================================
 echo 'load pg_normalized_batch'
 echo '================================================================================'
 # FIXME: implement this with GNU parallel
-#time echo "$files" | parallel ./load_normalized.sh
+time echo "$files" | parallel ./load_normalized.sh
 
 
 
