@@ -23,7 +23,7 @@ services:
       - POSTGRES_PASSWORD=pass
       - PGUSER=postgres
     ports:
-      - 10645:5432
+      - 10647:5432
 
   pg_normalized_batch:
     build: services/pg_normalized_batch
